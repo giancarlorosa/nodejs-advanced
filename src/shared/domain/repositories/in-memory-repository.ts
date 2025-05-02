@@ -8,7 +8,7 @@ export abstract class InMemoryRepository<E extends Entity>
   items: E[] = [];
 
   async insert(entity: E): Promise<void> {
-    await new Promise(() => this.items.push(entity));
+    await new Promise(resolve => resolve(this.items.push(entity)));
   }
 
   async findById(id: string): Promise<E> {
@@ -16,7 +16,7 @@ export abstract class InMemoryRepository<E extends Entity>
   }
 
   async findAll(): Promise<E[]> {
-    return await new Promise(() => this.items);
+    return await new Promise(resolve => resolve(this.items));
   }
 
   async update(entity: E): Promise<void> {
@@ -29,13 +29,13 @@ export abstract class InMemoryRepository<E extends Entity>
   async delete(id: string): Promise<void> {
     await this._get(id);
     const index = this.items.findIndex(item => item.id === id);
-    this.items.slice(index, 1);
+    this.items.splice(index, 1);
   }
 
   protected async _get(id: string): Promise<E> {
     const _id = `${id}`;
-    const entity: E = await new Promise(() =>
-      this.items.find(item => item.id === _id),
+    const entity: E = await new Promise(resolve =>
+      resolve(this.items.find(item => item.id === _id)),
     );
 
     if (!entity) {
