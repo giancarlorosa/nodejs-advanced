@@ -9,6 +9,8 @@ export namespace UpdateUserUsecase {
     name: string;
   };
 
+  export type Output = UserOutputDto;
+
   export class Usecase implements DefaultUseCase<Input, UserOutputDto> {
     constructor(private userRepository: UserRepository.Repository) {}
 

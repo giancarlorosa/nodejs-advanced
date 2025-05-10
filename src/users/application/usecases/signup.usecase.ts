@@ -12,7 +12,9 @@ export namespace SignupUsecase {
     password: string;
   };
 
-  export class Usecase implements DefaultUseCase<Input, UserOutputDto> {
+  export type Output = UserOutputDto;
+
+  export class Usecase implements DefaultUseCase<Input, Output> {
     constructor(
       private userRepository: UserRepository.Repository,
       private hashProvider: HashProvider,

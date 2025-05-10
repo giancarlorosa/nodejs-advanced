@@ -33,13 +33,13 @@ export class UsersController {
   private signinUseCase: SigninUsecase.Usecase;
 
   @Inject(UpdateUserUsecase.Usecase)
-  private updateUseCase: UpdateUserUsecase.Usecase;
+  private updateUserUseCase: UpdateUserUsecase.Usecase;
 
   @Inject(UpdatePasswordUsecase.Usecase)
   private updatePasswordUseCase: UpdatePasswordUsecase.Usecase;
 
   @Inject(DeleteUserUsecase.Usecase)
-  private deleteUseCase: DeleteUserUsecase.Usecase;
+  private deleteUserUseCase: DeleteUserUsecase.Usecase;
 
   @Inject(GetuserUsecase.Usecase)
   private getUserUseCase: GetuserUsecase.Usecase;
@@ -70,7 +70,7 @@ export class UsersController {
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.updateUseCase.execute({ id, ...updateUserDto });
+    return this.updateUserUseCase.execute({ id, ...updateUserDto });
   }
 
   @Patch(':id')
@@ -84,6 +84,6 @@ export class UsersController {
   @HttpCode(204)
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    await this.deleteUseCase.execute({ id });
+    await this.deleteUserUseCase.execute({ id });
   }
 }

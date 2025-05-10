@@ -7,7 +7,9 @@ export namespace GetuserUsecase {
     id: string;
   };
 
-  export class Usecase implements DefaultUseCase<Input, UserOutputDto> {
+  export type Output = UserOutputDto;
+
+  export class Usecase implements DefaultUseCase<Input, Output> {
     constructor(private userRepository: UserRepository.Repository) {}
 
     async execute(input: Input): Promise<UserOutputDto> {
