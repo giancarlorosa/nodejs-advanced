@@ -3,12 +3,13 @@ services:
   db:
     build: .
     container_name: api-db
-    restart: always
+    restart: unless-stopped
     tty: true
     ports:
-      - '5454:5432'
+      - '5432:5432'
     volumes:
       - .docker/dbdata:/var/lib/postgresql/data
     environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_PASSOWRD=docker
       - POSTGRES_DB=projectdb
